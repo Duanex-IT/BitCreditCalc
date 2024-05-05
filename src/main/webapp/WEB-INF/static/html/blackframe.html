@@ -1,0 +1,27 @@
+<html>
+<head>
+    <title></title>
+    <script>
+        function siebelSender() {
+            var brDocument = top.document;
+            var ScriptUtils = brDocument.getElementById("ScriptUtilsObject");
+            if (!ScriptUtils) {
+                alert("NOT FOUND OBJECT");
+            }
+            else {
+                var mycars = new Array();
+                mycars[0] = "Saab";
+                mycars[1] = "Volvo";
+                mycars[2] = "BMW";
+                ScriptUtils.SendToSiebel("1", 2, 1, 1, mycars);
+            }
+
+        }
+
+        //siebelSender();
+    </script>
+</head>
+<body style="background-color: #000000">
+
+</body>
+</html>

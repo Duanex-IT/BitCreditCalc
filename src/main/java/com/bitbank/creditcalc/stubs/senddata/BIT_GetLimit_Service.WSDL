@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions
+        xmlns="http://schemas.xmlsoap.org/wsdl/"
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+        targetNamespace="http://siebel.com/asi/"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:tns="http://siebel.com/asi/"
+        ><types
+></types
+><message
+ name="GetLimit_Input"
+><part
+ name="DesiredLimit"
+ type="xsd:string"
+></part
+><part
+ name="OpptyId"
+ type="xsd:string"
+></part
+><part
+ name="CalcLimit"
+ type="xsd:string"
+></part
+></message
+><message
+ name="GetLimit_Output"
+><part
+ name="Error_spcCode"
+ type="xsd:string"
+></part
+><part
+ name="Error_spcMessage"
+ type="xsd:string"
+></part
+></message
+><portType
+ name="BIT_spcGetLimit_spcService"
+><operation
+ name="GetLimit"
+><input
+ message="tns:GetLimit_Input"
+></input
+><output
+ message="tns:GetLimit_Output"
+></output
+></operation
+></portType
+><binding
+ name="BIT_spcGetLimit_spcService"
+ type="tns:BIT_spcGetLimit_spcService"
+><soap:binding
+ transport="http://schemas.xmlsoap.org/soap/http"
+ style="rpc"
+></soap:binding
+><operation
+ name="GetLimit"
+><soap:operation
+ soapAction="rpc/http://siebel.com/asi/:GetLimit"
+></soap:operation
+><input
+><soap:body
+ namespace="http://siebel.com/asi/"
+ use="literal"
+></soap:body
+></input
+><output
+><soap:body
+ namespace="http://siebel.com/asi/"
+ use="literal"
+></soap:body
+></output
+></operation
+></binding
+><service
+ name="BIT_spcGetLimit_spcService"
+><port
+ binding="tns:BIT_spcGetLimit_spcService"
+ name="BIT_spcGetLimit_spcService"
+><soap:address
+ location="http://192.168.103.30/eai_anon_rus/start.swe?SWEExtSource=SecureWebService&amp;SWEExtCmd=Execute"
+></soap:address
+></port
+></service
+></definitions
+>

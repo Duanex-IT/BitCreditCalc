@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>BitBank CreditCalc tests</title>
+
+    <link rel="stylesheet" href="lib/qunit-1.11.0.css" />
+    <script src="lib/qunit-1.11.0.js"></script>
+    <script src="../../../main/webapp/WEB-INF/static/js/creditcalc.js"></script>
+
+    <script>
+        test("calculator functions", function() {
+            // limit, term
+            equal(calcMonthPayment(1000,2,0.3), 800);
+            equal(calcMonthPayment(1000,1,0.3), 1300);
+            equal(calcMonthPayment(3000,10,0.3), 1200);
+            equal(calcMonthPayment(6000,24,0.3), 2050);
+
+            //term, payment
+            equal(calcLimit(2,800,0.3), 1000);
+            equal(calcLimit(1,1300,0.3), 1000);
+            equal(calcLimit(10,1200,0.3), 3000);
+            equal(calcLimit(24,2050,0.3), 6000);
+
+            //limit, payment
+            equal(calcTerm(1000,800,0.3),2);
+            equal(calcTerm(1000,1300,0.3),1);
+            equal(calcTerm(3000,1200,0.3),10);
+            equal(calcTerm(6000,2050,0.3),24);
+        });
+    </script>
+</head>
+<body>
+<div id="qunit"></div>
+</body>
+</html>

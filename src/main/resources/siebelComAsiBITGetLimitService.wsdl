@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?><definitions
+ xmlns="http://schemas.xmlsoap.org/wsdl/"
+ xmlns:xsdLocal0="http://www.siebel.com/xml/BIT%20Calc%20Result"
+ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+ targetNamespace="http://siebel.com/asi/"
+ xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+ xmlns:tns="http://siebel.com/asi/"
+><types
+><xsd:schema
+ elementFormDefault="qualified"
+ xmlns:xsdLocal0="http://www.siebel.com/xml/BIT%20Calc%20Result"
+ attributeFormDefault="unqualified"
+ targetNamespace="http://www.siebel.com/xml/BIT%20Calc%20Result"
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+><xsd:annotation
+><xsd:documentation
+>Copyright (C) 2001-2004 Siebel Systems, Inc. All rights reserved. Siebel XSD Generation</xsd:documentation
+></xsd:annotation
+><xsd:element
+ name="BITCalcResult"
+ type="xsdLocal0:BITCalcResult"
+></xsd:element
+><xsd:complexType
+ name="BITCalcResultTopElmt"
+><xsd:sequence
+><xsd:element
+ name="BITCalcResult"
+ maxOccurs="1"
+ minOccurs="1"
+ type="xsdLocal0:BITCalcResult"
+></xsd:element
+></xsd:sequence
+></xsd:complexType
+><xsd:complexType
+ name="BITCalcResult"
+><xsd:sequence
+><xsd:element
+ name="Result"
+ maxOccurs="1"
+ minOccurs="0"
+ type="xsdLocal0:Result"
+></xsd:element
+></xsd:sequence
+></xsd:complexType
+><xsd:complexType
+ name="Result"
+><xsd:sequence
+><xsd:element
+ name="Activity"
+ maxOccurs="unbounded"
+ minOccurs="0"
+ type="xsdLocal0:Activity"
+></xsd:element
+><xsd:element
+ name="Page"
+ maxOccurs="unbounded"
+ minOccurs="0"
+ type="xsdLocal0:Page"
+></xsd:element
+></xsd:sequence
+></xsd:complexType
+><xsd:complexType
+ name="Activity"
+><xsd:sequence
+><xsd:element
+ name="ActivityId"
+ maxOccurs="1"
+ minOccurs="0"
+ type="xsd:string"
+></xsd:element
+><xsd:element
+ name="ParentId"
+ maxOccurs="1"
+ minOccurs="0"
+ type="xsd:string"
+></xsd:element
+><xsd:element
+ name="Step"
+ maxOccurs="1"
+ minOccurs="0"
+ type="xsd:string"
+></xsd:element
+><xsd:element
+ name="DocId"
+ maxOccurs="1"
+ minOccurs="0"
+ type="xsd:string"
+></xsd:element
+><xsd:element
+ name="ActivityName"
+ maxOccurs="1"
+ minOccurs="0"
+ type="xsd:string"
+></xsd:element
+></xsd:sequence
+></xsd:complexType
+><xsd:complexType
+ name="Page"
+><xsd:sequence
+><xsd:element
+ name="PageId"
+ maxOccurs="1"
+ minOccurs="0"
+ type="xsd:string"
+></xsd:element
+><xsd:element
+ name="ActivityId"
+ maxOccurs="1"
+ minOccurs="0"
+ type="xsd:string"
+></xsd:element
+><xsd:element
+ name="PageName"
+ maxOccurs="1"
+ minOccurs="0"
+ type="xsd:string"
+></xsd:element
+></xsd:sequence
+></xsd:complexType
+></xsd:schema
+></types
+><message
+ name="GetLimit_Input"
+><part
+ name="DesiredLimit"
+ type="xsd:string"
+></part
+><part
+ name="IOData"
+ type="xsdLocal0:BITCalcResultTopElmt"
+></part
+><part
+ name="OpptyId"
+ type="xsd:string"
+></part
+><part
+ name="CalcLimit"
+ type="xsd:string"
+></part
+></message
+><message
+ name="GetLimit_Output"
+><part
+ name="Error_spcCode"
+ type="xsd:string"
+></part
+><part
+ name="Error_spcMessage"
+ type="xsd:string"
+></part
+></message
+><portType
+ name="BIT_spcGetLimit_spcService"
+><operation
+ name="GetLimit"
+><input
+ message="tns:GetLimit_Input"
+></input
+><output
+ message="tns:GetLimit_Output"
+></output
+></operation
+></portType
+><binding
+ name="BIT_spcGetLimit_spcService"
+ type="tns:BIT_spcGetLimit_spcService"
+><soap:binding
+ transport="http://schemas.xmlsoap.org/soap/http"
+ style="rpc"
+></soap:binding
+><operation
+ name="GetLimit"
+><soap:operation
+ soapAction="rpc/http://siebel.com/asi/:GetLimit"
+></soap:operation
+><input
+><soap:body
+ namespace="http://siebel.com/asi/"
+ use="literal"
+></soap:body
+></input
+><output
+><soap:body
+ namespace="http://siebel.com/asi/"
+ use="literal"
+></soap:body
+></output
+></operation
+></binding
+><service
+ name="BIT_spcGetLimit_spcService"
+><port
+ binding="tns:BIT_spcGetLimit_spcService"
+ name="BIT_spcGetLimit_spcService"
+><soap:address
+ location="http://192.168.103.30/eai_anon_rus/start.swe?SWEExtSource=SecureWebService&amp;SWEExtCmd=Execute"
+></soap:address
+></port
+></service
+></definitions
+>

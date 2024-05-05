@@ -1,0 +1,14 @@
+<!--http://localhost:8080/creditcalc/static/html/frame.html-->
+<html>
+<head>
+    <title>Test frame</title>
+</head>
+<frameset cols="200px,555px,*">
+    <frame src="topframe.html" name="topFrame" resize>
+    <frameset rows="465px,*">
+        <frame src="/creditcalc/" name="crCalcFrame" scrolling="no" noresize>
+        <frame src="blackframe.html" name="mainFrame">
+    </frameset>
+    <frame src="blackframe.html" name="bottomFrame">
+</frameset>
+</html>

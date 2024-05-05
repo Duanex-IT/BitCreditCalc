@@ -1,0 +1,81 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <context:annotation-config/>
+    <mvc:annotation-driven/>
+
+    <context:component-scan base-package="com.bitbank.creditcalc.mvc,com.bitbank.creditcalc.service,com.bitbank.creditcalc.utils"/>
+
+    <mvc:resources mapping="/creditcalc/static/**" location="/WEB-INF/static/" />
+    <mvc:resources mapping="/calcReturnSumm/static/**" location="/WEB-INF/static/" />
+    <mvc:resources mapping="/static/**" location="/WEB-INF/static/" />
+
+    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--//////////LOCALIZATION//////////////-->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="classpath:localization" />
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="fileEncodings" value="UTF-8"/>
+        <property name="useCodeAsDefaultMessage" value="false"/>
+    </bean>
+
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+        <property name="defaultLocale" value="ru"/>
+    </bean>
+
+    <bean class = "org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <array>
+                <bean class = "org.springframework.http.converter.StringHttpMessageConverter">
+                    <property name="supportedMediaTypes" value = "text/plain;charset=UTF-8" />
+                </bean>
+            </array>
+        </property>
+    </bean>
+    <!--//////////END LOCALIZATION//////////////-->
+
+    <bean class="com.bitbank.bitutils.utils.SoapUtils"/>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="file:${bit_config}creditcalc.properties"/>
+        <property name="systemPropertiesMode" value="2"/>
+    </bean>
+
+    <bean id="siebelDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="oracle.jdbc.OracleDriver" />
+        <property name="url" value="${siebel.connection.url}" />
+        <property name="username" value="${siebel.connection.username}" />
+        <property name="password" value="${siebel.connection.password}" />
+    </bean>
+    <bean id="siebelJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="siebelDataSource" />
+    </bean>
+
+    <!-- A file based configuration bean -->
+    <bean id="senderConfiguration" class="org.apache.commons.configuration.PropertiesConfiguration">
+        <constructor-arg type="java.net.URL" value="file:${bit_config}creditcalc.properties"/>
+        <property name="reloadingStrategy" ref="reloadingStrategy"/>
+    </bean>
+    <!-- The managed reloading strategy for the configuration bean -->
+    <bean id="reloadingStrategy" class="org.apache.commons.configuration.reloading.FileChangedReloadingStrategy"/>
+
+    <bean id="emailSender" class="com.bitbank.notificator.core.sender.EmailSender">
+        <constructor-arg name="project" value="DataProcessor"/>
+        <constructor-arg name="recipients" value="${notificate.error.emails}"/>
+    </bean>
+
+</beans>
